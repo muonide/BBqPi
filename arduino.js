@@ -13,17 +13,17 @@ var ARDUINO = function(device, address) {
 ARDUINO.prototype.sense = function(callback) {
     
     //process received data
-    this.wire.read(this.address, 1, function(err, data) {
+    this.wire.read(this.address, 2, function(err, data) {
         
         //populate output object
         var tempData = new Object();
         
-        tempData = data;
+        tempData = parseInt(data[0]) * 256 + parseInt(data[1]);
         //tempData = parseInt(data[0]) * 256 + parseInt(data[1]);
      
         
         //call callback
-        callback(accelData);
+        callback(tempData);
     });
 }
 
